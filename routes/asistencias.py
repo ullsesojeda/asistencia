@@ -122,7 +122,6 @@ def mi_asistencia():
 
 @asistencias.route("/registrar", methods=["POST"])
 @login_required
-@admin_required
 def registrar_asistencia():
 
     if current_user.empleado is None:
