@@ -1,0 +1,131 @@
+<div class="modal fade"
+     id="modalHorario"
+     tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <form
+                id="formHorario"
+                method="POST"
+                action="{{ url_for('horarios.nuevo_horario') }}">
+
+                <div class="modal-header">
+
+                    <h5
+                        class="modal-title"
+                        id="tituloModalHorario">
+
+                        Nuevo Horario
+
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+
+                        <label>Nombre</label>
+
+                        <input
+                            id="nombre"
+                            type="text"
+                            name="nombre"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>Hora de entrada</label>
+
+                            <input
+                                id="hora_entrada"
+                                type="time"
+                                name="hora_entrada"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>Hora de salida</label>
+
+                            <input
+                                id="hora_salida"
+                                type="time"
+                                name="hora_salida"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label>Tolerancia (minutos)</label>
+
+                        <input
+                            id="tolerancia"
+                            type="number"
+                            name="tolerancia"
+                            class="form-control"
+                            value="10"
+                            min="0">
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label>Observaciones</label>
+
+                        <textarea
+                            id="observaciones"
+                            name="observaciones"
+                            class="form-control"
+                            rows="3"></textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Cancelar
+
+                    </button>
+
+                    <button
+                        class="btn btn-success">
+
+                        Guardar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

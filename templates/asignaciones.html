@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}
+Asignaciones
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>Asignaciones</h2>
+
+    <button
+        class="btn btn-success"
+        onclick="nuevaAsignacion()">
+
+        <i class="fa-solid fa-plus"></i>
+        Asignar Empleado
+
+    </button>
+
+</div>
+
+<div class="card shadow-sm">
+
+    <div class="card-body">
+
+        <table class="table table-striped table-hover align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Empleado</th>
+                    <th>Servicio</th>
+                    <th>Horario</th>
+                    <th>Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Estado</th>
+                    <th width="140">Acción</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for asignacion in asignaciones %}
+
+                <tr>
+
+                    <td>{{ asignacion.empleado.nombre_completo() }}</td>
+
+                    <td>{{ asignacion.servicio.nombre }}</td>
+
+                    <td>
+                        {{ asignacion.horario.nombre }}
+                        <br>
+                        <small class="text-muted">
+                            {{ asignacion.horario.hora_entrada.strftime('%H:%M') }}
+                            -
+                            {{ asignacion.horario.hora_salida.strftime('%H:%M') }}
+                        </small>
+                    </td>
+
+                    <td>
+                        {{ asignacion.fecha_inicio.strftime('%d/%m/%Y') }}
+                    </td>
+
+                    <td>
+                        {% if asignacion.fecha_fin %}
+                            {{ asignacion.fecha_fin.strftime('%d/%m/%Y') }}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+
+                    <td>
+
+                        {% if asignacion.activo %}
+                            <span class="badge bg-success">Activa</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Histórica</span>
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if asignacion.activo %}
+
+                        <button
+                            class="btn btn-primary btn-sm"
+                            onclick="reasignarEmpleado('{{ asignacion.empleado.id }}')">
+
+                            <i class="fa-solid fa-right-left"></i>
+
+                            Reasignar
+
+                        </button>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="7" class="text-center text-muted">
+
+                        No existen asignaciones.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% include "components/modal_asignacion.html" %}
+
+<script>
+
+function nuevaAsignacion(){
+
+    document.getElementById("tituloModalAsignacion").innerHTML =
+        "Asignar Empleado";
+
+    document.getElementById("formAsignacion").reset();
+
+    document.getElementById("formAsignacion").action =
+        "{{ url_for('asignaciones.nueva_asignacion') }}";
+
+    new bootstrap.Modal(
+        document.getElementById("modalAsignacion")
+    ).show();
+
+}
+
+function reasignarEmpleado(empleadoId){
+
+    nuevaAsignacion();
+
+    document.getElementById("empleado_id").value = empleadoId;
+
+}
+
+</script>
+
+{% endblock %}

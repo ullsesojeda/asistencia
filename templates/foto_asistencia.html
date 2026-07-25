@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Fotografía de Asistencia{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4>Fotografía de la Asistencia</h4>
+
+        </div>
+
+        <div class="card-body text-center">
+
+            <h5>
+
+                {{ asistencia.empleado.nombre }}
+                {{ asistencia.empleado.apellido_paterno }}
+                {{ asistencia.empleado.apellido_materno }}
+
+            </h5>
+
+            <hr>
+
+            <p>
+
+                <strong>Fecha:</strong>
+
+                {{ asistencia.fecha_hora.strftime("%d/%m/%Y %H:%M") }}
+
+            </p>
+
+            <p>
+
+                <strong>Movimiento:</strong>
+
+                {{ asistencia.tipo }}
+
+            </p>
+
+            {% if asistencia.foto %}
+
+                <img
+
+                    src="{{ url_for('static', filename=asistencia.foto) }}"
+
+                    class="img-fluid rounded shadow"
+
+                    style="max-width:700px;">
+
+            {% else %}
+
+                <div class="alert alert-warning">
+
+                    No existe fotografía registrada.
+
+                </div>
+
+            {% endif %}
+
+            <hr>
+
+            <a
+
+                href="{{ url_for('asistencias.historial') }}"
+
+                class="btn btn-secondary">
+
+                Regresar
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

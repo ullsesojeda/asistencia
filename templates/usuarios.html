@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block content %}
+<h2>Usuarios</h2>
+<table class="table"><tr><th>Usuario</th><th>Nombre</th><th>Rol</th><th>Estado</th><th></th></tr>
+{% for usuario in usuarios %}
+<tr><td>{{usuario.usuario}}</td><td>{{usuario.nombre}}</td><td>{{usuario.rol}}</td><td>{{'Activo' if usuario.activo else 'Inactivo'}}</td>
+<td><button class="btn btn-warning btn-sm" onclick="editarUsuario('{{usuario.id}}','{{usuario.nombre}}','{{usuario.rol}}')">Editar</button>
+<a class="btn btn-secondary btn-sm" href="{{url_for('usuarios.cambiar_estado',id=usuario.id)}}">Estado</a></td></tr>
+{% endfor %}</table>
+{% include 'components/modal_usuario.html' %}
+<script>
+function editarUsuario(id,n,r){
+frmUsuario.action='/usuarios/editar/'+id;
+nombre.value=n;rol.value=r;
+new bootstrap.Modal(document.getElementById('modalUsuario')).show();
+}
+</script>{% endblock %}

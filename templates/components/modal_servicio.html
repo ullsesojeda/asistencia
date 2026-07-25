@@ -1,0 +1,132 @@
+<div class="modal fade"
+     id="modalServicio"
+     tabindex="-1">
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+            <form
+                id="formServicio"
+                method="POST"
+                action="{{ url_for('servicios.nuevo_servicio') }}">
+
+                <div class="modal-header">
+
+    <h5
+        class="modal-title"
+        id="tituloModalServicio">
+
+        Nuevo Servicio
+
+    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>Nombre del servicio</label>
+
+                            <input
+                                id="nombre"
+                                type="text"
+                                name="nombre"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>Cliente</label>
+
+                            <input
+                                id="cliente"
+                                type="text"
+                                name="cliente"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label>Dirección</label>
+
+                        <input
+                            id="direccion"
+                            type="text"
+                            name="direccion"
+                            class="form-control">
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>Teléfono</label>
+
+                            <input
+                                id="telefono"
+                                type="text"
+                                name="telefono"
+                                class="form-control">
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label>Observaciones</label>
+
+                        <textarea
+                            id="observaciones"
+                            name="observaciones"
+                            rows="3"
+                            class="form-control"></textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Cancelar
+
+                    </button>
+
+                    <button
+                        class="btn btn-success">
+
+                        Guardar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

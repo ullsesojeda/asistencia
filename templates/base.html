@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}SCA{% endblock %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="d-flex">
+
+    <!-- SIDEBAR -->
+
+    <nav class="sidebar">
+
+        <div class="logo">
+
+            <h3>SCA</h3>
+
+            <small>Sistema de Control de Asistencia</small>
+
+        </div>
+
+        <hr>
+
+        <a href="{{ url_for('dashboard') }}">
+            <i class="fas fa-house"></i>
+            Dashboard
+        </a>
+        {% if current_user.rol == "Administrador" %}
+
+        <a href="{{ url_for('usuarios.lista_usuarios') }}">
+            <i class="fas fa-users"></i>
+            Usuarios
+        </a>
+
+        <a href="{{ url_for('empleados.lista_empleados') }}">
+        <i class="fas fa-user-tie"></i>
+        Empleados
+        </a>
+
+        <a href="{{ url_for('servicios.lista_servicios') }}">
+        <i class="fas fa-building"></i>
+        Servicios
+        </a>
+
+        <a href="{{ url_for('horarios.lista_horarios') }}">
+        <i class="fas fa-clock"></i>
+            Horarios
+        </a>
+
+        <a href="{{ url_for('asignaciones.lista_asignaciones') }}">
+        <i class="fas fa-user-check"></i>
+        Asignaciones
+        </a>
+
+        <a href="{{ url_for('asistencias.historial') }}">
+
+    <i class="fas fa-location-dot"></i>
+
+    Asistencias
+
+        </a>
+
+        <a href="#">
+            <i class="fas fa-chart-column"></i>
+            Reportes
+        </a>
+        {% endif %}
+
+        {% if current_user.rol == "Empleado" %}
+
+<a href="{{ url_for('asistencias.mi_asistencia') }}">
+
+    <i class="fas fa-fingerprint"></i>
+
+    Mi Asistencia
+
+</a>
+{% endif %}
+        <hr>
+
+        {% if current_user.is_authenticated %}
+
+        <div class="usuario">
+
+            <strong>
+
+                {{ current_user.nombre }}
+
+            </strong>
+
+            <br>
+
+            {{ current_user.rol }}
+
+        </div>
+
+        <br>
+
+        <a href="{{ url_for('auth.logout') }}"
+           class="text-danger">
+
+            <i class="fas fa-right-from-bracket"></i>
+
+            Cerrar sesión
+
+        </a>
+
+        {% endif %}
+
+    </nav>
+
+    <!-- CONTENIDO -->
+
+    <main class="contenido">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for categoria, mensaje in messages %}
+
+                    <div class="alert alert-{{ categoria }} alert-dismissible fade show">
+
+                        {{ mensaje }}
+
+                        <button
+                            class="btn-close"
+                            data-bs-dismiss="alert">
+
+                        </button>
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,332 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Asistencia{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4 class="mb-0">
+
+                <i class="bi bi-fingerprint"></i>
+
+                Registro de Asistencia
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <!-- ======================================== -->
+            <!-- DATOS DEL EMPLEADO -->
+            <!-- ======================================== -->
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="fw-bold">
+
+                        Empleado
+
+                    </label>
+
+                    <input
+                        class="form-control"
+                        value="{{ empleado.nombre_completo() }}"
+                        readonly>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="fw-bold">
+
+                        Número
+
+                    </label>
+
+                    <input
+                        class="form-control"
+                        value="{{ empleado.numero_empleado }}"
+                        readonly>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="fw-bold">
+
+                        Puesto
+
+                    </label>
+
+                    <input
+                        class="form-control"
+                        value="{{ empleado.puesto }}"
+                        readonly>
+
+                </div>
+
+            </div>
+
+            <!-- ======================================== -->
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="fw-bold">
+
+                        Servicio
+
+                    </label>
+
+                    <input
+                        class="form-control"
+                        value="{{ servicio.nombre }}"
+                        readonly>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="fw-bold">
+
+                        Horario
+
+                    </label>
+
+                    <input
+                        class="form-control"
+                        value="{{ horario.nombre }}"
+                        readonly>
+
+                </div>
+
+            </div>
+
+            <!-- ======================================== -->
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Hora Entrada
+
+                    </label>
+
+                    <input
+                        class="form-control"
+                        value="{{ horario.hora_entrada.strftime('%H:%M') }}"
+                        readonly>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label>
+
+                        Hora Salida
+
+                    </label>
+
+                    <input
+                        class="form-control"
+                        value="{{ horario.hora_salida.strftime('%H:%M') }}"
+                        readonly>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- ======================================== -->
+            <!-- CÁMARA -->
+            <!-- ======================================== -->
+
+            <h5 class="text-center">
+
+                Fotografía
+
+            </h5>
+
+            <div
+                class="text-center">
+
+                <video
+
+                    id="video"
+
+                    class="img-fluid rounded border"
+
+                    autoplay
+
+                    playsinline>
+
+                </video>
+
+                <canvas
+
+                    id="canvas"
+
+                    style="display:none;">
+
+                </canvas>
+
+                <img
+
+                    id="preview"
+
+                    class="img-fluid rounded mt-3"
+
+                    style="display:none;">
+
+            </div>
+
+            <div class="text-center mt-3">
+
+                <button
+
+                    type="button"
+
+                    class="btn btn-success"
+
+                    id="btnFoto">
+
+                    📷 Tomar Fotografía
+
+                </button>
+
+            </div>
+
+            <hr>
+
+            <!-- ======================================== -->
+            <!-- GPS -->
+            <!-- ======================================== -->
+
+            <h5 class="text-center">
+
+                Ubicación
+
+            </h5>
+
+            <div class="alert alert-secondary">
+
+                <span id="estadoGPS">
+
+                    Esperando ubicación...
+
+                </span>
+
+            </div>
+
+            <hr>
+
+            <!-- ======================================== -->
+            <!-- FORMULARIO -->
+            <!-- ======================================== -->
+
+            <form
+
+                id="formAsistencia"
+
+                method="POST"
+
+                action="{{ url_for('asistencias.registrar_asistencia') }}"
+
+                enctype="multipart/form-data">
+
+                <input
+                    type="hidden"
+                    name="latitud"
+                    id="latitud">
+
+                <input
+                    type="hidden"
+                    name="longitud"
+                    id="longitud">
+
+                <input
+                    type="hidden"
+                    name="precision"
+                    id="precision">
+
+                <input
+                    type="hidden"
+                    name="direccion"
+                    id="direccion">
+
+                <!-- Aquí se enviará la foto -->
+
+                
+                <div class="mb-3">
+
+                    <label>
+
+                        Observaciones
+
+                    </label>
+
+                    <textarea
+
+                        class="form-control"
+
+                        name="observaciones"
+
+                        rows="3">
+
+                    </textarea>
+
+                </div>
+
+                {% if siguiente == "Completado" %}
+
+                    <button
+
+                        class="btn btn-success btn-lg w-100"
+
+                        disabled>
+
+                        ✔ Asistencia del día completada
+
+                    </button>
+
+                {% else %}
+
+                    <button
+
+                        class="btn btn-primary btn-lg w-100"
+
+                        type="submit">
+
+                        Registrar {{ siguiente }}
+
+                    </button>
+
+                {% endif %}
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ======================================== -->
+<!-- JAVASCRIPT -->
+<!-- ======================================== -->
+
+<script src="{{ url_for('static', filename='js/asistencias.js') }}"></script>
+
+{% endblock %}

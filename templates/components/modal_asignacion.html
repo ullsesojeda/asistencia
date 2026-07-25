@@ -1,0 +1,163 @@
+<div class="modal fade"
+     id="modalAsignacion"
+     tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <form
+                id="formAsignacion"
+                method="POST"
+                action="{{ url_for('asignaciones.nueva_asignacion') }}">
+
+                <div class="modal-header">
+
+                    <h5
+                        class="modal-title"
+                        id="tituloModalAsignacion">
+
+                        Asignar Empleado
+
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+
+                        <label>Empleado</label>
+
+                        <select
+                            id="empleado_id"
+                            name="empleado_id"
+                            class="form-select"
+                            required>
+
+                            <option value="">
+                                Seleccione...
+                            </option>
+
+                            {% for empleado in empleados %}
+
+                            <option value="{{ empleado.id }}">
+
+                                {{ empleado.nombre }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label>Servicio</label>
+
+                        <select
+                            id="servicio_id"
+                            name="servicio_id"
+                            class="form-select"
+                            required>
+
+                            <option value="">
+                                Seleccione...
+                            </option>
+
+                            {% for servicio in servicios %}
+
+                            <option value="{{ servicio.id }}">
+
+                                {{ servicio.nombre }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label>Horario</label>
+
+                        <select
+                            id="horario_id"
+                            name="horario_id"
+                            class="form-select"
+                            required>
+
+                            <option value="">
+                                Seleccione...
+                            </option>
+
+                            {% for horario in horarios %}
+
+                            <option value="{{ horario.id }}">
+
+                                {{ horario.nombre }}
+                                ({{ horario.hora_entrada.strftime('%H:%M') }}
+                                -
+                                {{ horario.hora_salida.strftime('%H:%M') }})
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label>Fecha de inicio</label>
+
+                        <input
+                            type="date"
+                            name="fecha_inicio"
+                            id="fecha_inicio"
+                            class="form-control"
+                            value="{{ hoy }}"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Cancelar
+
+                    </button>
+
+                    <button
+                        class="btn btn-success">
+
+                        Guardar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

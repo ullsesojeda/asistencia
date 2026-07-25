@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Historial de Asistencias{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4>
+
+                Historial de Asistencias
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table
+                    class="table table-striped table-hover table-bordered">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>Fecha</th>
+
+                            <th>Empleado</th>
+
+                            <th>Servicio</th>
+
+                            <th>Horario</th>
+
+                            <th>Movimiento</th>
+
+                            <th>GPS</th>
+
+                            <th>Foto</th>
+
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for a in registros %}
+
+                        <tr>
+
+                            <td>
+
+                                {{ a.fecha_hora.strftime("%d/%m/%Y %H:%M") }}
+
+                            </td>
+
+                            <td>
+
+                                {{ a.empleado.nombre }}
+                                {{ a.empleado.apellido_paterno }}
+                                {{ a.empleado.apellido_materno }}
+                                
+                            </td>
+
+                            <td>
+
+                                {{ a.servicio.nombre }}
+
+                            </td>
+
+                            <td>
+
+                                {{ a.horario.nombre }}
+
+                            </td>
+
+                            <td>
+
+                                {{ a.tipo }}
+
+                            </td>
+
+                            <td>
+
+                                {% if a.latitud %}
+
+                                    Sí
+
+                                {% else %}
+
+                                    No
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {% if a.foto %}
+
+                                    <img
+                                        src="{{ url_for('static', filename=a.foto) }}"
+                                        width="70"
+                                        class="img-thumbnail">
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="{{ url_for('asistencias.ver_foto', id=a.id) }}"
+                                    class="btn btn-info btn-sm">
+
+                                    Foto
+
+                                </a>
+
+                                {% if a.latitud %}
+
+                                <a
+                                    href="{{ url_for('asistencias.ver_ubicacion', id=a.id) }}"
+                                    target="_blank"
+                                    class="btn btn-success btn-sm">
+
+                                    Mapa
+
+                                </a>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
