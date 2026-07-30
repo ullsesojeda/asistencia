@@ -18,6 +18,10 @@ from routes.asignaciones import asignaciones
 
 from routes.asistencias import asistencias
 
+from routes.actividades import actividades
+
+from routes.actividades_asignadas import actividades_asignadas
+
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -44,6 +48,8 @@ app.register_blueprint(servicios)
 app.register_blueprint(horarios)
 app.register_blueprint(asignaciones)
 app.register_blueprint(asistencias)
+app.register_blueprint(actividades)
+app.register_blueprint(actividades_asignadas)
 
 @login_manager.user_loader
 def load_user(user_id):
