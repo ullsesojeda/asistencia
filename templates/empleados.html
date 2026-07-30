@@ -19,6 +19,10 @@
 <th>Teléfono</th>
 <th>Estado</th>
 <th>Acciones</th>
+<th>Turno</th>
+<th>Entrada</th>
+<th>Salida</th>
+<th>Departamento</th>
 </tr>
 </thead>
 <tbody>
@@ -28,6 +32,21 @@
 <td>{{ empleado.nombre_completo() }}</td>
 <td>{{ empleado.puesto }}</td>
 <td>{{ empleado.telefono }}</td>
+<td>{{ empleado.turno or "" }}</td>
+
+<td>
+    {% if empleado.hora_entrada %}
+        {{ empleado.hora_entrada.strftime("%H:%M") }}
+    {% endif %}
+</td>
+
+<td>
+    {% if empleado.hora_salida %}
+        {{ empleado.hora_salida.strftime("%H:%M") }}
+    {% endif %}
+</td>
+
+<td>{{ empleado.departamento or "" }}</td>
 <td>
 {% if empleado.activo %}
 <span class="badge bg-success">Activo</span>

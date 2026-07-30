@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block title %}Mis Actividades{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h3>
+
+            Mis Actividades
+
+        </h3>
+
+        <a
+            href="{{ url_for('actividades.nueva') }}"
+            class="btn btn-primary"
+        >
+
+            Nueva Actividad
+
+        </a>
+
+    </div>
+
+    {% if pendientes %}
+
+<div class="card border-warning shadow mb-4">
+
+    <div class="card-header bg-warning">
+
+        <strong>
+
+            Actividades Asignadas
+
+        </strong>
+
+    </div>
+
+    <div class="card-body">
+
+        {% for actividad in pendientes %}
+
+        <div
+            class="d-flex
+                   justify-content-between
+                   align-items-center
+                   border-bottom
+                   py-2"
+        >
+
+            <div>
+
+                <strong>
+
+                    {{ actividad.actividad }}
+
+                </strong>
+
+                <br>
+
+                <small>
+
+                    {{ actividad.fecha_programada.strftime("%d/%m/%Y") }}
+
+                </small>
+
+                <br>
+
+                Prioridad:
+
+                {{ actividad.prioridad }}
+
+            </div>
+
+            <div>
+
+                <a
+
+                    href="{{ url_for('actividades.iniciar_asignada', id=actividad.id) }}"
+
+                    class="btn btn-success"
+
+                >
+
+                    Iniciar
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endif %}    
+
+    <div class="card shadow">
+        
+        <div class="table-responsive">
+
+            <table class="table table-hover table-striped mb-0">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Fecha</th>
+
+                        <th>Actividad</th>
+
+                        <th>Inicio</th>
+
+                        <th>Fin</th>
+
+                        <th>Duración</th>
+
+                        <th>Estado</th>
+
+                        <th>Acción</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for actividad in actividades %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ actividad.fecha.strftime("%d/%m/%Y") }}
+
+                        </td>
+
+                        <td>
+
+                            {{ actividad.actividad }}
+
+                        </td>
+
+                        <td>
+
+                            {{ actividad.hora_inicio.strftime("%H:%M:%S") }}
+
+                        </td>
+
+                        <td>
+
+                            {% if actividad.hora_fin %}
+
+                                {{ actividad.hora_fin.strftime("%H:%M:%S") }}
+
+                            {% else %}
+
+                                -
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {{ actividad.duracion }}
+
+                        </td>
+
+                        <td>
+
+                            {% if actividad.estado == "En proceso" %}
+
+                                <span class="badge bg-warning text-dark">
+
+                                    En proceso
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-success">
+
+                                    Terminada
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if actividad.estado == "En proceso" %}
+
+                                <a
+                                    href="{{ url_for('actividades.finalizar', id=actividad.id) }}"
+                                    class="btn btn-danger btn-sm"
+                                >
+
+                                    Finalizar
+
+                                </a>
+
+                            {% else %}
+
+                                <span class="text-success">
+
+                                    ✔
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+
+                        <td colspan="7" class="text-center">
+
+                            No hay actividades registradas.
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

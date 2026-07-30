@@ -77,76 +77,41 @@
 
             <!-- ======================================== -->
 
-            <div class="row">
-
-                <div class="col-md-6 mb-3">
-
-                    <label class="fw-bold">
-
-                        Servicio
-
-                    </label>
-
-                    <input
-                        class="form-control"
-                        value="{{ servicio.nombre }}"
-                        readonly>
-
-                </div>
-
-                <div class="col-md-6 mb-3">
-
-                    <label class="fw-bold">
-
-                        Horario
-
-                    </label>
-
-                    <input
-                        class="form-control"
-                        value="{{ horario.nombre }}"
-                        readonly>
-
-                </div>
-
-            </div>
-
             <!-- ======================================== -->
 
             <div class="row">
 
-                <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3">
 
-                    <label>
+        <label class="fw-bold">
 
-                        Hora Entrada
+            Hora de Entrada
 
-                    </label>
+        </label>
 
-                    <input
-                        class="form-control"
-                        value="{{ horario.hora_entrada.strftime('%H:%M') }}"
-                        readonly>
+        <input
+            class="form-control"
+            value="{{ empleado.hora_entrada.strftime('%H:%M') if empleado.hora_entrada else '--:--' }}"
+            readonly>
 
-                </div>
+    </div>
 
-                <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3">
 
-                    <label>
+        <label class="fw-bold">
 
-                        Hora Salida
+            Hora de Salida
 
-                    </label>
+        </label>
 
-                    <input
-                        class="form-control"
-                        value="{{ horario.hora_salida.strftime('%H:%M') }}"
-                        readonly>
+        <input
+            class="form-control"
+            value="{{ empleado.hora_salida.strftime('%H:%M') if empleado.hora_salida else '--:--' }}"
+            readonly>
 
-                </div>
+    </div>
 
-            </div>
-
+</div>
             <hr>
 
             <!-- ======================================== -->

@@ -68,6 +68,11 @@
         Asignaciones
         </a>
 
+        <a href="{{ url_for('actividades_asignadas.lista') }}">
+            <i class="fas fa-list-check"></i>
+            Actividades Asignadas
+        </a>
+
         <a href="{{ url_for('asistencias.historial') }}">
 
     <i class="fas fa-location-dot"></i>
@@ -89,8 +94,13 @@
     <i class="fas fa-fingerprint"></i>
 
     Mi Asistencia
-
 </a>
+
+<a href="{{ url_for('actividades.lista') }}">
+    <i class="fas fa-list-check"></i>
+    Actividades
+</a>
+
 {% endif %}
         <hr>
 
