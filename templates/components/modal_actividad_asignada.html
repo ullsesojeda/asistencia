@@ -1,0 +1,197 @@
+<div
+    class="modal fade"
+    id="modalNuevaActividad"
+    tabindex="-1"
+>
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+<form
+    method="POST"
+    action="{{ url_for('actividades_asignadas.nueva') }}"
+>
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+
+Nueva Actividad Asignada
+
+</h5>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal">
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label>
+
+Empleado
+
+</label>
+
+<select
+class="form-select"
+name="empleado_id"
+required>
+
+<option value="">
+
+Seleccione...
+
+</option>
+
+{% for empleado in empleados %}
+
+<option value="{{ empleado.id }}">
+
+{{ empleado.nombre_completo() }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>
+
+Fecha
+
+</label>
+
+<input
+type="date"
+class="form-control"
+name="fecha_programada"
+value="{{ hoy }}"
+required>
+
+</div>
+
+<div class="col-md-12 mb-3">
+
+<label>
+
+Actividad
+
+</label>
+
+<input
+type="text"
+class="form-control"
+name="actividad"
+required>
+
+</div>
+
+<div class="col-md-12 mb-3">
+
+<label>
+
+Descripción
+
+</label>
+
+<textarea
+class="form-control"
+name="descripcion"
+rows="3"></textarea>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>
+
+Prioridad
+
+</label>
+
+<select
+class="form-select"
+name="prioridad">
+
+<option>
+
+Alta
+
+</option>
+
+<option selected>
+
+Media
+
+</option>
+
+<option>
+
+Baja
+
+</option>
+
+</select>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>
+
+Observaciones
+
+</label>
+
+<input
+type="text"
+class="form-control"
+name="observaciones">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+type="submit"
+class="btn btn-success">
+
+Guardar
+
+</button>
+
+<button
+type="button"
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+Cancelar
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>

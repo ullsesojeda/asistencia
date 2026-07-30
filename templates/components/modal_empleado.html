@@ -1,42 +1,272 @@
 <div class="modal fade" id="modalEmpleado" tabindex="-1">
-<div class="modal-dialog modal-lg">
-<div class="modal-content">
-<form id="frmEmpleado" method="POST">
-<div class="modal-header">
-<h5 id="tituloModal" class="modal-title">Empleado</h5>
-<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            <form id="frmEmpleado" method="POST">
+
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="tituloModal">
+                        Empleado
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- ================= DATOS PERSONALES ================= -->
+
+                    <h5 class="text-primary">
+                        <i class="fa-solid fa-user"></i>
+                        Datos Personales
+                    </h5>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                Nombre
+                            </label>
+
+                            <input
+                                id="nombre"
+                                name="nombre"
+                                class="form-control"
+                                required>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">
+                                Apellido Paterno
+                            </label>
+
+                            <input
+                                id="apellido_paterno"
+                                name="apellido_paterno"
+                                class="form-control"
+                                required>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">
+                                Apellido Materno
+                            </label>
+
+                            <input
+                                id="apellido_materno"
+                                name="apellido_materno"
+                                class="form-control">
+                        </div>
+
+                    </div>
+
+                    <!-- ================= INFORMACIÓN LABORAL ================= -->
+
+                    <h5 class="text-primary mt-4">
+                        <i class="fa-solid fa-briefcase"></i>
+                        Información Laboral
+                    </h5>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">
+                                Puesto
+                            </label>
+
+                            <input
+                                id="puesto"
+                                name="puesto"
+                                class="form-control"
+                                required>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">
+                                Departamento
+                            </label>
+
+                            <input
+                                name="departamento"
+                                class="form-control">
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">
+                                Jefe inmediato
+                            </label>
+
+                            <input
+                                name="jefe_inmediato"
+                                class="form-control">
+                        </div>
+
+                    </div>
+
+                    <!-- ================= HORARIO ================= -->
+
+                    <h5 class="text-primary mt-4">
+                        <i class="fa-solid fa-clock"></i>
+                        Horario
+                    </h5>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-3 mb-3">
+
+                            <label class="form-label">
+                                Hora de entrada
+                            </label>
+
+                            <input
+                                type="time"
+                                name="hora_entrada"
+                                class="form-control">
+
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+
+                            <label class="form-label">
+                                Hora de salida
+                            </label>
+
+                            <input
+                                type="time"
+                                name="hora_salida"
+                                class="form-control">
+
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+
+                            <label class="form-label">
+                                Turno
+                            </label>
+
+                            <select
+                                name="turno"
+                                class="form-select">
+
+                                <option value="">
+                                    Seleccione...
+                                </option>
+
+                                <option>
+                                    Matutino
+                                </option>
+
+                                <option>
+                                    Vespertino
+                                </option>
+
+                                <option>
+                                    Nocturno
+                                </option>
+
+                                <option>
+                                    Mixto
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+
+                            <label class="form-label">
+                                Días de descanso
+                            </label>
+
+                            <input
+                                type="text"
+                                name="dias_descanso"
+                                class="form-control"
+                                placeholder="Ej. Sábado y Domingo">
+
+                        </div>
+
+                    </div>
+
+                    <!-- ================= CONTACTO ================= -->
+
+                    <h5 class="text-primary mt-4">
+                        <i class="fa-solid fa-address-book"></i>
+                        Información de Contacto
+                    </h5>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Teléfono
+                            </label>
+
+                            <input
+                                id="telefono"
+                                name="telefono"
+                                class="form-control">
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                Correo electrónico
+                            </label>
+
+                            <input
+                                id="correo"
+                                name="correo"
+                                type="email"
+                                class="form-control">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                        Cancelar
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Guardar Empleado
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
 </div>
-<div class="modal-body">
-<div class="row">
-<div class="col-md-4">
-<label>Nombre</label>
-<input id="nombre" name="nombre" class="form-control" required>
-</div>
-<div class="col-md-4">
-<label>Apellido Paterno</label>
-<input id="apellido_paterno" name="apellido_paterno" class="form-control" required>
-</div>
-<div class="col-md-4">
-<label>Apellido Materno</label>
-<input id="apellido_materno" name="apellido_materno" class="form-control">
-</div>
-<div class="col-md-4 mt-3">
-<label>Puesto</label>
-<input id="puesto" name="puesto" class="form-control" required>
-</div>
-<div class="col-md-4 mt-3">
-<label>Teléfono</label>
-<input id="telefono" name="telefono" class="form-control">
-</div>
-<div class="col-md-4 mt-3">
-<label>Correo</label>
-<input id="correo" name="correo" type="email" class="form-control">
-</div>
-</div>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-<button class="btn btn-success">Guardar</button>
-</div>
-</form>
-</div></div></div>
