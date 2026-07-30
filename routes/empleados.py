@@ -36,6 +36,28 @@ def nuevo_empleado():
         puesto = request.form["puesto"].strip()
         telefono = request.form.get("telefono", "").strip()
         correo = request.form.get("correo", "").strip()
+        hora_entrada = (
+            datetime.strptime(
+                request.form["hora_entrada"],
+                "%H:%M"
+            ).time()
+            if request.form["hora_entrada"]
+            else None
+        )
+
+        hora_salida = (
+            datetime.strptime(
+                request.form["hora_salida"],
+                "%H:%M"
+            ).time()
+            if request.form["hora_salida"]
+            else None
+        )
+
+        turno = request.form["turno"]
+        dias_descanso = request.form["dias_descanso"]
+        departamento = request.form["departamento"]
+        jefe_inmediato = request.form["jefe_inmediato"]
 
         numero = generar_numero_empleado()
 
@@ -49,29 +71,24 @@ def nuevo_empleado():
         usuario_base = usuario_generado
 
         while Usuario.query.filter_by(usuario=usuario_generado).first():
-
             usuario_generado = f"{usuario_base}{contador}"
-
             contador += 1
 
         empleado = Empleado(
-
             numero_empleado=numero,
-
             nombre=nombre,
-
             apellido_paterno=apellido_paterno,
-
             apellido_materno=apellido_materno,
-
             puesto=puesto,
-
             telefono=telefono,
-
             correo=correo,
-
+            hora_entrada=hora_entrada,
+            hora_salida=hora_salida,
+            turno=turno,
+            dias_descanso=dias_descanso,
+            departamento=departamento,
+            jefe_inmediato=jefe_inmediato,
             fecha_ingreso=datetime.today().date()
-
         )
 
         db.session.add(empleado)
@@ -130,6 +147,31 @@ def editar_empleado(empleado_id):
         empleado.puesto = request.form["puesto"].strip()
         empleado.telefono = request.form.get("telefono", "").strip()
         empleado.correo = request.form.get("correo", "").strip()
+        empleado.hora_entrada = (
+            datetime.strptime(
+                request.form["hora_entrada"],
+                "%H:%M"
+            ).time()
+            if request.form["hora_entrada"]
+            else None
+    )
+
+        empleado.hora_salida = (
+            datetime.strptime(
+            request.form["hora_salida"],
+            "%H:%M"
+            ).time()
+            if request.form["hora_salida"]
+            else None
+    )   
+
+        empleado.turno = request.form.get("turno", "")
+
+        empleado.dias_descanso = request.form.get("dias_descanso", "")
+
+        empleado.departamento = request.form.get("departamento", "")
+
+        empleado.jefe_inmediato = request.form.get("jefe_inmediato", "")
 
         if empleado.usuario:
             empleado.usuario.nombre = empleado.nombre_completo()

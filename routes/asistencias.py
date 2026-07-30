@@ -86,19 +86,7 @@ def mi_asistencia():
 
         return redirect(url_for("dashboard"))
 
-    asignacion = obtener_asignacion_activa(
-        current_user.empleado.id
-    )
-
-    if asignacion is None:
-
-        flash(
-            "No existe una asignación activa.",
-            "warning"
-        )
-
-        return redirect(url_for("dashboard"))
-
+    
     siguiente = obtener_siguiente_movimiento(
         current_user.empleado.id
     )
@@ -109,9 +97,9 @@ def mi_asistencia():
 
         empleado=current_user.empleado,
 
-        servicio=asignacion.servicio,
+        servicio=None,
 
-        horario=asignacion.horario,
+        horario=current_user.empleado.horario,
 
         siguiente=siguiente
 
@@ -133,19 +121,7 @@ def registrar_asistencia():
 
         return redirect(url_for("asistencias.mi_asistencia"))
 
-    asignacion = obtener_asignacion_activa(
-        current_user.empleado.id
-    )
-
-    if asignacion is None:
-
-        flash(
-            "No existe una asignación activa.",
-            "warning"
-        )
-
-        return redirect(url_for("asistencias.mi_asistencia"))
-
+    
     movimiento = obtener_siguiente_movimiento(
         current_user.empleado.id
     )
@@ -228,9 +204,9 @@ def registrar_asistencia():
 
         empleado_id=current_user.empleado.id,
 
-        servicio_id=asignacion.servicio_id,
+        servicio_id=None,
 
-        horario_id=asignacion.horario_id,
+        horario_id=None,
 
         fecha_hora=datetime.now(),
 
