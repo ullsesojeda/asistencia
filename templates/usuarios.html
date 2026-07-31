@@ -1,16 +1,100 @@
 {% extends "base.html" %}{% block content %}
-<h2>Usuarios</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>Usuarios</h2>
+
+    <button
+        class="btn btn-success"
+        onclick="nuevoUsuario()"
+    >
+
+        <i class="fas fa-user-plus"></i>
+
+        Nuevo Usuario
+
+    </button>
+
+</div>
 <table class="table"><tr><th>Usuario</th><th>Nombre</th><th>Rol</th><th>Estado</th><th></th></tr>
 {% for usuario in usuarios %}
 <tr><td>{{usuario.usuario}}</td><td>{{usuario.nombre}}</td><td>{{usuario.rol}}</td><td>{{'Activo' if usuario.activo else 'Inactivo'}}</td>
-<td><button class="btn btn-warning btn-sm" onclick="editarUsuario('{{usuario.id}}','{{usuario.nombre}}','{{usuario.rol}}')">Editar</button>
-<a class="btn btn-secondary btn-sm" href="{{url_for('usuarios.cambiar_estado',id=usuario.id)}}">Estado</a></td></tr>
-{% endfor %}</table>
+<td>
+
+    <button
+        class="btn btn-warning btn-sm"
+        onclick="editarUsuario(
+            '{{ usuario.id }}',
+            '{{ usuario.nombre }}',
+            '{{ usuario.rol }}'
+        )"
+    >
+
+        <i class="fas fa-pen"></i>
+
+        Editar
+
+    </button>
+
+    <a
+        class="btn btn-info btn-sm"
+        href="{{ url_for('usuarios.restablecer_password', id=usuario.id) }}"
+        onclick="return confirmarPassword('{{ usuario.nombre }}')"
+    >
+
+        <i class="fas fa-key"></i>
+
+        Restablecer
+
+    </a>
+
+    <a
+        class="btn btn-secondary btn-sm"
+        href="{{ url_for('usuarios.cambiar_estado', id=usuario.id) }}"
+    >
+
+        <i class="fas fa-user-lock"></i>
+
+        Estado
+
+    </a>
+
+</td>
+    {% endfor %}</table>
 {% include 'components/modal_usuario.html' %}
+{% include 'components/modal_nuevo_usuario.html' %}
 <script>
 function editarUsuario(id,n,r){
 frmUsuario.action='/usuarios/editar/'+id;
 nombre.value=n;rol.value=r;
 new bootstrap.Modal(document.getElementById('modalUsuario')).show();
 }
-</script>{% endblock %}
+function nuevoUsuario(){
+
+    frmNuevoUsuario.reset();
+
+    new bootstrap.Modal(
+
+        document.getElementById("modalNuevoUsuario")
+
+    ).show();
+
+}
+</script>
+<script>
+
+function confirmarPassword(nombre){
+
+    return confirm(
+
+        "¿Desea restablecer la contraseña de:\n\n" +
+
+        nombre +
+
+        "\n\nEl usuario deberá cambiarla al iniciar sesión."
+
+    );
+
+}
+
+</script>
+{% endblock %}

@@ -8,15 +8,15 @@ Actividades Asignadas
 
 {% block content %}
 
-<div class="container-fluid mt-4">
+<div class="card shadow mt-4">
 
+    <div class="card-header bg-success text-white">
     <div class="d-flex justify-content-between align-items-center mb-3">
 
-        <h3>
+        <h5 class="mb-0">
+            Actividades Asignadas por el Administrador
 
-            Actividades Asignadas
-
-        </h3>
+        </h5>
 
         <button
             class="btn btn-primary"
@@ -183,6 +183,168 @@ Actividades Asignadas
             </table>
 
         </div>
+
+    </div>
+
+</div>
+
+<!-- ======================================================= -->
+<!-- ACTIVIDADES REALIZADAS                                  -->
+<!-- ======================================================= -->
+
+<div class="card shadow mt-4">
+
+    <div class="card-header bg-success text-white">
+
+        <h5 class="mb-0">
+
+            Actividades Capturadas Directamente por el Empleado
+
+        </h5>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table table-striped table-hover mb-0">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Empleado</th>
+
+                    <th>Fecha</th>
+
+                    <th>Actividad</th>
+
+                    <th>Hora Inicio</th>
+
+                    <th>Hora Fin</th>
+
+                    <th>Duración</th>
+
+                    <th>Estado</th>
+
+                    <th>Observaciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for actividad in actividades_realizadas %}
+
+                <tr>
+
+                    <td>
+
+                        {{ actividad.id }}
+
+                    </td>
+
+                    <td>
+
+                        {{ actividad.empleado.nombre_completo() }}
+
+                    </td>
+
+                    <td>
+
+                        {{ actividad.fecha.strftime("%d/%m/%Y") }}
+
+                    </td>
+
+                    <td>
+
+                        {{ actividad.actividad }}
+
+                    </td>
+
+                    <td>
+
+                        {{ actividad.hora_inicio.strftime("%H:%M") }}
+
+                    </td>
+
+                    <td>
+
+                        {% if actividad.hora_fin %}
+
+                            {{ actividad.hora_fin.strftime("%H:%M") }}
+
+                        {% else %}
+
+                            —
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {{ actividad.duracion }}
+
+                    </td>
+
+                    <td>
+
+                        {% if actividad.estado=="En proceso" %}
+
+                            <span class="badge bg-warning text-dark">
+
+                                En proceso
+
+                            </span>
+
+                        {% elif actividad.estado=="Finalizada" %}
+
+                            <span class="badge bg-success">
+
+                                Finalizada
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary">
+
+                                {{ actividad.estado }}
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {{ actividad.observaciones or "" }}
+
+                    </td>
+
+                </tr>
+
+            {% else %}
+
+                <tr>
+
+                    <td colspan="9" class="text-center">
+
+                        No existen actividades registradas.
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
 
     </div>
 

@@ -108,29 +108,43 @@
 
         <div class="usuario">
 
-            <strong>
+    <strong>
 
-                {{ current_user.nombre }}
+        {{ current_user.nombre }}
 
-            </strong>
+    </strong>
 
-            <br>
+    <br>
 
-            {{ current_user.rol }}
+    {{ current_user.rol }}
 
-        </div>
+</div>
 
-        <br>
+<br>
 
-        <a href="{{ url_for('auth.logout') }}"
-           class="text-danger">
+<a
+    href="{{ url_for('auth.cambiar_password') }}"
+    class="text-warning"
+>
 
-            <i class="fas fa-right-from-bracket"></i>
+    <i class="fas fa-key"></i>
 
-            Cerrar sesión
+    Cambiar contraseña
 
-        </a>
+</a>
 
+<br><br>
+
+<a
+    href="{{ url_for('auth.logout') }}"
+    class="text-danger"
+>
+
+    <i class="fas fa-right-from-bracket"></i>
+
+    Cerrar sesión
+
+</a>
         {% endif %}
 
     </nav>

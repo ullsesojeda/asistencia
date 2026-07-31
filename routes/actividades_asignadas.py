@@ -16,6 +16,7 @@ from flask_login import (
 from models import (
     db,
     ActividadAsignada,
+    Actividad,
     Empleado
 )
 
@@ -26,8 +27,6 @@ actividades_asignadas = Blueprint(
     "actividades_asignadas",
     __name__
 )
-
-
 # ======================================================
 # LISTADO
 # ======================================================
@@ -37,15 +36,34 @@ actividades_asignadas = Blueprint(
 @admin_required
 def lista():
 
-    actividades = ActividadAsignada.query.order_by(
-        ActividadAsignada.id.desc()
-    ).all()
+    actividades = (
+        ActividadAsignada.query
+        .order_by(
+            ActividadAsignada.fecha_programada.desc(),
+            ActividadAsignada.id.desc()
+        )
+        .all()
+    )
 
-    empleados = Empleado.query.filter_by(
-        activo=True
-    ).order_by(
-        Empleado.nombre
-    ).all()
+    actividades_realizadas = (
+        Actividad.query
+        .join(Empleado)
+        .order_by(
+            Actividad.fecha.desc(),
+            Actividad.hora_inicio.desc()
+        )
+        .all()
+    )
+
+    empleados = (
+        Empleado.query
+        .filter_by(activo=True)
+        .order_by(
+            Empleado.nombre,
+            Empleado.apellido_paterno
+        )
+        .all()
+    )
 
     return render_template(
 
@@ -53,13 +71,13 @@ def lista():
 
         actividades=actividades,
 
+        actividades_realizadas=actividades_realizadas,
+
         empleados=empleados,
 
         hoy=date.today()
 
     )
-
-
 # ======================================================
 # NUEVA ACTIVIDAD
 # ======================================================
